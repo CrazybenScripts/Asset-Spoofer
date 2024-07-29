@@ -1,5 +1,5 @@
 local hint = Instance.new("Hint")
-hint.Text = 'Press "]" to clear all animations/sounds.'
+hint.Text = 'Press "]" to clear all sounds and "[" to play a sound.'
 hint.Parent = workspace
 wait(5)
 hint:Remove()
@@ -16,6 +16,8 @@ frame.Active = true
 frame.Size = UDim2.new(0.264, 0, 0.161, 0)
 frame.CanvasSize = UDim2.new(0, 0, 10, 0)
 frame.Parent = screenGui
+local enteringSound = false
+local textBox2 = nil
 
 game:GetService("UserInputService").InputBegan:Connect(function(input)
 	if input.KeyCode == Enum.KeyCode.RightBracket then
@@ -23,6 +25,32 @@ game:GetService("UserInputService").InputBegan:Connect(function(input)
 			if not item:IsA("UIListLayout") then
 				item:Remove()
 			end
+		end
+	end
+	if input.KeyCode == Enum.KeyCode.LeftBracket then
+		enteringSound = true
+		textBox2 = Instance.new("TextBox")
+		textBox2.Text = ""
+		textBox2.ClearTextOnFocus = false
+		textBox2.BackgroundColor3 = Color3.new(1, 1, 1)
+		textBox2.Size = UDim2.new(0.264, 0, 0.161, 0)
+		textBox2.Position = UDim2.new(.5,0,.5,0)
+		textBox2.Parent = screenGui
+		textBox2.PlaceholderText = "Enter sound id... (press Enter/Return to confirm)"
+	end
+	if input.KeyCode == Enum.KeyCode.Return then
+		if enteringSound == true then
+			enteringSound = false
+			local tempSound = Instance.new("Sound")
+			tempSound.Volume = 1.5
+			tempSound.Name = "TempSound_"..math.random(100,999)
+			tempSound.SoundId = textBox2.Text
+			tempSound.Parent = workspace
+			tempSound:Play()
+			textBox2:Remove()
+			textBox2 = nil
+			wait(tempSound.TimeLength)
+			tempSound:Remove()
 		end
 	end
 end)
