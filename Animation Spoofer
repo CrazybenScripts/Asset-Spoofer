@@ -1,49 +1,271 @@
-local hint = Instance.new("Hint")
-hint.Text = 'Welcome to Bens Animation Spoofer v1.01! Press "]" to clear all animations.'
-hint.Parent = workspace
-wait(5)
-hint:Remove()
-local screenGui = Instance.new("ScreenGui")
-screenGui.Name = "AlrightThisIsAwesome"
-screenGui.ResetOnSpawn = false
-screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
-local frame1 = Instance.new("Frame")
-frame1.BackgroundTransparency = 1
-frame1.Draggable = true
-frame1.Active = true
-frame1.Interactable = true
-frame1.Size = UDim2.new(0.264, 0, 0.161, 0)
-frame1.Parent = screenGui
-frame1.ZIndex = 999
+local spooferVersion = 1.1
 
-local frame = Instance.new("ScrollingFrame")
-Instance.new("UIListLayout").Parent = frame
-frame.BackgroundColor3 = Color3.new(0.164706, 0.160784, 0.188235)
-frame.Size = UDim2.new(1,0,1,0)
-frame.CanvasSize = UDim2.new(0, 0, 10, 0)
-frame.Parent = frame1
+local OpeningGui = Instance.new("ScreenGui")
+local Opened = Instance.new("Frame")
+local Frame = Instance.new("Frame")
+local TextLabel = Instance.new("TextLabel")
+local TextLabel_2 = Instance.new("TextLabel")
+local Sound = Instance.new("Sound")
 
-game:GetService("UserInputService").InputBegan:Connect(function(input)
-	if input.KeyCode == Enum.KeyCode.RightBracket then
-		for i, item in ipairs(frame:GetChildren()) do
-			if not item:IsA("UIListLayout") then
-				item:Remove()
-			end
+--Properties:
+
+OpeningGui.Name = "OpeningGui"
+OpeningGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+OpeningGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Opened.Name = "Opened"
+Opened.Parent = OpeningGui
+Opened.AnchorPoint = Vector2.new(0.5, 0.5)
+Opened.BackgroundColor3 = Color3.fromRGB(42, 41, 48)
+Opened.BackgroundTransparency = 1.000
+Opened.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Opened.BorderSizePixel = 0
+Opened.Position = UDim2.new(0.5, 0, 0.5, 0)
+Opened.Size = UDim2.new(0.305059522, 0, 0.235741451, 0)
+Opened.Visible = false
+
+Frame.Parent = OpeningGui
+Frame.AnchorPoint = Vector2.new(0.5, 0.5)
+Frame.BackgroundColor3 = Color3.fromRGB(42, 41, 48)
+Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame.BorderSizePixel = 0
+Frame.Position = UDim2.new(0.5, 0, 0.5, 0)
+Frame.Size = UDim2.new(0.305000007, 0, 0, 0)
+
+TextLabel.Parent = Frame
+TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BackgroundTransparency = 1.000
+TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.BorderSizePixel = 0
+TextLabel.Position = UDim2.new(7.44476409e-08, 0, 0, 0)
+TextLabel.Size = UDim2.new(0.99999994, 0, 0.339434057, 0)
+TextLabel.Font = Enum.Font.SourceSans
+TextLabel.Text = "Ben's Animation Spoofer (v"..tostring(spooferVersion)..")"
+TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.TextScaled = true
+TextLabel.TextSize = 14.000
+TextLabel.TextWrapped = true
+
+TextLabel_2.Parent = Frame
+TextLabel_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_2.BackgroundTransparency = 1.000
+TextLabel_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel_2.BorderSizePixel = 0
+TextLabel_2.Position = UDim2.new(7.44476409e-08, 0, 0.327597708, 0)
+TextLabel_2.Size = UDim2.new(0.99999994, 0, 0.672402203, 0)
+TextLabel_2.Font = Enum.Font.SourceSans
+TextLabel_2.Text = "Loading..."
+TextLabel_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_2.TextScaled = true
+TextLabel_2.TextSize = 14.000
+TextLabel_2.TextWrapped = true
+
+Sound.SoundId = "rbxassetid://1845756489"
+Sound.Volume = 0
+Sound.TimePosition = 5
+Sound.Parent = OpeningGui
+Sound:Play()
+game:GetService("TweenService"):Create(Sound, TweenInfo.new(1.5, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {Volume = 1}):Play()
+game:GetService("TweenService"):Create(Frame, TweenInfo.new(1.5, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {Size = UDim2.new(0.305, 0,0.236, 0)}):Play()
+game:GetService("TweenService"):Create(Frame, TweenInfo.new(1.5, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {Position = UDim2.new(0.5, 0,0.5, 0)}):Play()
+wait(math.random(6.5,8))
+game:GetService("TweenService"):Create(Sound, TweenInfo.new(1.5, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {Volume = 0}):Play()
+game:GetService("TweenService"):Create(Frame, TweenInfo.new(1.5, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {Size = UDim2.new(0.305, 0,0, 0)}):Play()
+game:GetService("TweenService"):Create(Frame, TweenInfo.new(1.5, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {Position = UDim2.new(0.5, 0,0.617, 0)}):Play()
+wait(1.5)
+OpeningGui:Remove()
+
+local AlrightThisIsAwesome = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local Frame_2 = Instance.new("Frame")
+local FrameMove = Instance.new("Frame")
+local ScrollingFrame = Instance.new("ScrollingFrame")
+local UIListLayout = Instance.new("UIListLayout")
+local TextLabel = Instance.new("TextLabel")
+local UICorner = Instance.new("UICorner")
+local UICorner_2 = Instance.new("UICorner")
+local Frame_3 = Instance.new("Frame")
+local UIListLayout_2 = Instance.new("UIListLayout")
+local Close = Instance.new("TextButton")
+local Clear = Instance.new("TextButton")
+local Scan = Instance.new("TextButton")
+local Bool = Instance.new("BoolValue")
+
+--Properties:
+
+AlrightThisIsAwesome.Name = "AlrightThisIsAwesome"
+AlrightThisIsAwesome.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+AlrightThisIsAwesome.ResetOnSpawn = false
+
+FrameMove.Parent = AlrightThisIsAwesome
+FrameMove.BackgroundTransparency = 1
+FrameMove.ZIndex = 999
+FrameMove.BackgroundColor3 = Color3.fromRGB(42, 40, 47)
+FrameMove.Draggable = true
+FrameMove.Active = true
+FrameMove.Interactable = true
+FrameMove.Position = UDim2.new(0.5, 192, 0.5, 36)
+FrameMove.Size = UDim2.new(0.263999999, 0, 0.160999998, 0)
+
+Frame.Parent = FrameMove
+Frame.BackgroundColor3 = Color3.fromRGB(42, 40, 47)
+Frame.Size = UDim2.new(1,0,1,0)
+
+Frame_2.Parent = Frame
+Frame_2.BackgroundColor3 = Color3.fromRGB(42, 40, 47)
+Frame_2.Size = UDim2.new(1, 0, 1, 0)
+
+ScrollingFrame.Parent = Frame_2
+ScrollingFrame.BackgroundColor3 = Color3.fromRGB(66, 63, 74)
+ScrollingFrame.Position = UDim2.new(0.0199999996, 0, 0.200000003, 0)
+ScrollingFrame.Size = UDim2.new(0.60799998, 0, 0.75, 0)
+ScrollingFrame.CanvasSize = UDim2.new(0, 0, 10, 0)
+
+UIListLayout.Parent = ScrollingFrame
+
+TextLabel.Parent = Frame_2
+TextLabel.BackgroundColor3 = Color3.fromRGB(66, 63, 74)
+TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.BorderSizePixel = 0
+TextLabel.Position = UDim2.new(1.72019168e-06, 0, 0, 0)
+TextLabel.Size = UDim2.new(1, 0, 0.150000006, 0)
+TextLabel.Font = Enum.Font.SourceSans
+TextLabel.Text = "Ben's Animation Spoofer (v"..tostring(spooferVersion)..")"
+TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.TextScaled = true
+TextLabel.TextSize = 14.000
+TextLabel.TextWrapped = true
+
+UICorner.Parent = TextLabel
+
+UICorner_2.Parent = Frame_2
+
+Frame_3.Parent = Frame_2
+Frame_3.BackgroundColor3 = Color3.fromRGB(66, 63, 74)
+Frame_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame_3.BorderSizePixel = 0
+Frame_3.Position = UDim2.new(0.657000005, 0, 0.200000003, 0)
+Frame_3.Size = UDim2.new(0.324000001, 0, 0.75, 0)
+
+UIListLayout_2.Parent = Frame_3
+UIListLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
+
+Close.Name = "Close"
+Close.Parent = Frame_3
+Close.BackgroundColor3 = Color3.fromRGB(42, 41, 48)
+Close.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Close.BorderSizePixel = 0
+Close.Size = UDim2.new(1, 0, 0.200000003, 0)
+Close.Font = Enum.Font.SourceSans
+Close.Text = "Close"
+Close.TextColor3 = Color3.fromRGB(255, 255, 255)
+Close.TextSize = 14.000
+
+Clear.Name = "Clear"
+Clear.Parent = Frame_3
+Clear.BackgroundColor3 = Color3.fromRGB(42, 41, 48)
+Clear.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Clear.BorderSizePixel = 0
+Clear.Size = UDim2.new(1, 0, 0.200000003, 0)
+Clear.Font = Enum.Font.SourceSans
+Clear.Text = "Clear All"
+Clear.TextColor3 = Color3.fromRGB(255, 255, 255)
+Clear.TextSize = 14.000
+
+Scan.Name = "Scan"
+Scan.Parent = Frame_3
+Scan.BackgroundColor3 = Color3.fromRGB(42, 41, 48)
+Scan.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Scan.BorderSizePixel = 0
+Scan.Size = UDim2.new(1, 0, 0.200000003, 0)
+Scan.Font = Enum.Font.SourceSans
+Scan.Text = "Toggle Scanning"
+Scan.TextColor3 = Color3.fromRGB(255, 255, 255)
+Scan.TextSize = 14.000
+
+Bool.Name = "AutoScanEnabled"
+Bool.Value = true
+Bool.Parent = AlrightThisIsAwesome
+
+local awesomeHoverSound = Instance.new("Sound")
+awesomeHoverSound.Name = "UISFX"
+awesomeHoverSound.SoundId = "rbxassetid://10066936758"
+awesomeHoverSound.Parent = AlrightThisIsAwesome
+
+local awesomeClickSound = Instance.new("Sound")
+awesomeClickSound.Name = "UISFX"
+awesomeClickSound.SoundId = "rbxassetid://6214955871"
+awesomeClickSound.Parent = AlrightThisIsAwesome
+
+
+Close.MouseButton1Click:Connect(function()
+	awesomeClickSound:Play()
+	AlrightThisIsAwesome.Enabled = false
+	local hint = Instance.new("Hint")
+	hint.Text = 'Press LeftAlt to reopen the spoofer'
+	hint.Parent = workspace
+	wait(5)
+	hint:Remove()
+end)
+
+Clear.MouseButton1Click:Connect(function()
+	awesomeClickSound:Play()
+	for i, item in ipairs(ScrollingFrame:GetChildren()) do
+		if not item:IsA("UIListLayout") then
+			item:Remove()
 		end
 	end
 end)
 
+Scan.MouseButton1Click:Connect(function()
+	awesomeClickSound:Play()
+	if Bool.Value == true then
+		Bool.Value = false
+		local hint = Instance.new("Hint")
+		hint.Text = 'Auto-Scanning is now off'
+		hint.Parent = workspace
+		wait(3)
+		hint:Remove()
+	else
+		Bool.Value = true
+		local hint = Instance.new("Hint")
+		hint.Text = 'Auto-Scanning is now on'
+		hint.Parent = workspace
+		wait(3)
+		hint:Remove()
+	end
+end)
+
+game:GetService("UserInputService").InputBegan:Connect(function(input)
+	if input.KeyCode == Enum.KeyCode.LeftAlt then
+		AlrightThisIsAwesome.Enabled = true
+		awesomeClickSound:Play()
+	end
+end)
+
+for i, button in ipairs(AlrightThisIsAwesome:GetDescendants()) do
+	if button:IsA("GuiButton") then
+		button.MouseEnter:Connect(function()
+			awesomeHoverSound:Play()
+		end)
+		
+		button.MouseLeave:Connect(function()
+			awesomeHoverSound:Play()
+		end)
+	end
+end
+
 while true do
 	wait(0.1)
 	for i, playingAnim in ipairs(game.Players.LocalPlayer.Character.Humanoid:GetPlayingAnimationTracks()) do
-		if not frame:FindFirstChild(playingAnim.Animation.AnimationId) then
+		if not ScrollingFrame:FindFirstChild(playingAnim.Animation.AnimationId) and Bool.Value == true then
 			local desc = playingAnim.Animation
 			local itemFrame = Instance.new("Frame")
 			itemFrame.Name = desc.AnimationId
-			itemFrame.BackgroundColor3 = Color3.new(0.254902, 0.254902, 0.254902)
-			itemFrame.Size = UDim2.new(.7,0,.025,0)
-			itemFrame.Parent = frame
+			itemFrame.BackgroundColor3 = Color3.new(0.164706, 0.160784, 0.188235)
+			itemFrame.Size = UDim2.new(.93,0,.035,0)
+			itemFrame.Parent = ScrollingFrame
 			local textBox = Instance.new("TextBox")
 			textBox.ClearTextOnFocus = false
 			textBox.BackgroundTransparency = 1
