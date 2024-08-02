@@ -1,5 +1,4 @@
-
-local spooferVersion = "1.1.1"
+local spooferVersion = "1.1.5"
 
 local OpeningGui = Instance.new("ScreenGui")
 local Opened = Instance.new("Frame")
@@ -94,6 +93,7 @@ local Scan = Instance.new("TextButton")
 local Bool = Instance.new("BoolValue")
 local Bool2 = Instance.new("BoolValue")
 local Dragging = Instance.new("TextButton")
+local TextBox = Instance.new("TextBox")
 
 --Properties:
 
@@ -156,7 +156,7 @@ UIListLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
 
 Close.Name = "Close"
 Close.Parent = Frame_3
-Close.BackgroundColor3 = Color3.fromRGB(42, 41, 48)
+Close.BackgroundColor3 = Color3.fromRGB(66, 63, 74)
 Close.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Close.BorderSizePixel = 0
 Close.Size = UDim2.new(1, 0, 0.200000003, 0)
@@ -167,7 +167,7 @@ Close.TextSize = 14.000
 
 Clear.Name = "Clear"
 Clear.Parent = Frame_3
-Clear.BackgroundColor3 = Color3.fromRGB(42, 41, 48)
+Clear.BackgroundColor3 = Color3.fromRGB(66, 63, 74)
 Clear.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Clear.BorderSizePixel = 0
 Clear.Size = UDim2.new(1, 0, 0.200000003, 0)
@@ -178,7 +178,7 @@ Clear.TextSize = 14.000
 
 Scan.Name = "Scan"
 Scan.Parent = Frame_3
-Scan.BackgroundColor3 = Color3.fromRGB(42, 41, 48)
+Scan.BackgroundColor3 = Color3.fromRGB(66, 63, 74)
 Scan.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Scan.BorderSizePixel = 0
 Scan.Size = UDim2.new(1, 0, 0.200000003, 0)
@@ -197,7 +197,7 @@ Bool2.Parent = AlrightThisIsAwesome
 
 Dragging.Name = "Dragging"
 Dragging.Parent = Frame_3
-Dragging.BackgroundColor3 = Color3.fromRGB(42, 41, 48)
+Dragging.BackgroundColor3 = Color3.fromRGB(66, 63, 74)
 Dragging.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Dragging.BorderSizePixel = 0
 Dragging.Size = UDim2.new(1, 0, 0.200000003, 0)
@@ -205,6 +205,20 @@ Dragging.Font = Enum.Font.SourceSans
 Dragging.Text = "Toggle Draggable UI"
 Dragging.TextColor3 = Color3.fromRGB(255, 255, 255)
 Dragging.TextSize = 14.000
+
+TextBox.Parent = Frame_3
+TextBox.BackgroundColor3 = Color3.fromRGB(66, 63, 74)
+TextBox.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextBox.BorderSizePixel = 0
+TextBox.Size = UDim2.new(1, 0, 0.200000003, 0)
+TextBox.Font = Enum.Font.SourceSans
+TextBox.PlaceholderColor3 = Color3.fromRGB(255, 255, 255)
+TextBox.PlaceholderText = "Target Player..."
+TextBox.Text = ""
+TextBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextBox.TextScaled = true
+TextBox.TextSize = 14.000
+TextBox.TextWrapped = true
 
 local awesomeHoverSound = Instance.new("Sound")
 awesomeHoverSound.Name = "UISFX"
@@ -215,6 +229,11 @@ local awesomeClickSound = Instance.new("Sound")
 awesomeClickSound.Name = "UISFX"
 awesomeClickSound.SoundId = "rbxassetid://6214955871"
 awesomeClickSound.Parent = AlrightThisIsAwesome
+
+local targetCharacter = Instance.new("ObjectValue")
+targetCharacter.Name = "targetCharacter"
+targetCharacter.Value = game.Players.LocalPlayer.Character
+targetCharacter.Parent = AlrightThisIsAwesome
 
 
 Close.MouseButton1Click:Connect(function()
@@ -280,6 +299,18 @@ Dragging.MouseButton1Click:Connect(function()
 	end
 end)
 
+TextBox:GetPropertyChangedSignal("Text"):Connect(function()
+	local newTarget = workspace:FindFirstChild(TextBox.Text)
+	if newTarget then
+		targetCharacter.Value = newTarget
+	else
+		local hint = Instance.new("Hint")
+		hint.Text = "Couldn't find name of player: "..TextBox.Text
+		hint.Parent = workspace
+		wait(3)
+		hint:Remove()
+	end
+end)
 
 
 game:GetService("UserInputService").InputBegan:Connect(function(input)
@@ -303,7 +334,7 @@ end
 
 while true do
 	wait(0.1)
-	for i, playingAnim in ipairs(game.Players.LocalPlayer.Character.Humanoid:GetPlayingAnimationTracks()) do
+	for i, playingAnim in ipairs(targetCharacter.Value.Humanoid:GetPlayingAnimationTracks()) do
 		if not ScrollingFrame:FindFirstChild(playingAnim.Animation.AnimationId) and Bool.Value == true then
 			local desc = playingAnim.Animation
 			local itemFrame = Instance.new("Frame")
