@@ -1,5 +1,5 @@
 local hint = Instance.new("Hint")
-hint.Text = 'Press "]" to clear all animations/sounds.'
+hint.Text = 'Welcome to Bens Animation Spoofer v1.01! Press "]" to clear all animations.'
 hint.Parent = workspace
 wait(5)
 hint:Remove()
@@ -8,14 +8,21 @@ screenGui.Name = "AlrightThisIsAwesome"
 screenGui.ResetOnSpawn = false
 screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
+local frame1 = Instance.new("Frame")
+frame1.BackgroundTransparency = 1
+frame1.Draggable = true
+frame1.Active = true
+frame1.Interactable = true
+frame1.Size = UDim2.new(0.264, 0, 0.161, 0)
+frame1.Parent = screenGui
+frame1.ZIndex = 999
+
 local frame = Instance.new("ScrollingFrame")
 Instance.new("UIListLayout").Parent = frame
-frame.BackgroundColor3 = Color3.new(1, 1, 1)
-frame.Draggable = true
-frame.Active = true
-frame.Size = UDim2.new(0.264, 0, 0.161, 0)
+frame.BackgroundColor3 = Color3.new(0.164706, 0.160784, 0.188235)
+frame.Size = UDim2.new(1,0,1,0)
 frame.CanvasSize = UDim2.new(0, 0, 10, 0)
-frame.Parent = screenGui
+frame.Parent = frame1
 
 game:GetService("UserInputService").InputBegan:Connect(function(input)
 	if input.KeyCode == Enum.KeyCode.RightBracket then
@@ -35,7 +42,7 @@ while true do
 			local itemFrame = Instance.new("Frame")
 			itemFrame.Name = desc.AnimationId
 			itemFrame.BackgroundColor3 = Color3.new(0.254902, 0.254902, 0.254902)
-			itemFrame.Size = UDim2.new(.7,0,.005,0)
+			itemFrame.Size = UDim2.new(.7,0,.025,0)
 			itemFrame.Parent = frame
 			local textBox = Instance.new("TextBox")
 			textBox.ClearTextOnFocus = false
