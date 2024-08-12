@@ -1,4 +1,4 @@
-local spooferVersion = "1.1.6"
+local spooferVersion = "1.1.7"
 
 local OpeningGui = Instance.new("ScreenGui")
 local Opened = Instance.new("Frame")
@@ -304,15 +304,16 @@ Dragging.MouseButton1Click:Connect(function()
 end)
 
 TextBox:GetPropertyChangedSignal("Text"):Connect(function()
-	local newTarget = workspace:FindFirstDescendant(TextBox.Text)
-	if newTarget and newTarget:IsA("Model") then
-		targetCharacter.Value = newTarget
-	else
-		local hint = Instance.new("Hint")
-		hint.Text = "Couldn't find name of player: "..TextBox.Text
-		hint.Parent = workspace
-		wait(3)
-		hint:Remove()
+	for i, charNew in ipairs(workspace:GetDescendants()) do
+		if charNew.Name == TextBox.Text and charNew:IsA("Model") then
+			targetCharacter.Value = charNew
+		else
+			local hint = Instance.new("Hint")
+			hint.Text = "Couldn't find name of player: "..TextBox.Text
+			hint.Parent = workspace
+			wait(3)
+			hint:Remove()
+		end
 	end
 end)
 
