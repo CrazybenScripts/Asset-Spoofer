@@ -1,4 +1,4 @@
-local spooferVersion = "1.1.5"
+local spooferVersion = "1.1.6"
 
 local OpeningGui = Instance.new("ScreenGui")
 local Opened = Instance.new("Frame")
@@ -94,6 +94,8 @@ local Bool = Instance.new("BoolValue")
 local Bool2 = Instance.new("BoolValue")
 local Dragging = Instance.new("TextButton")
 local TextBox = Instance.new("TextBox")
+local TextButton = Instance.new("TextButton")
+local Miniminus = Instance.new("TextButton")
 
 --Properties:
 
@@ -161,7 +163,7 @@ Close.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Close.BorderSizePixel = 0
 Close.Size = UDim2.new(1, 0, 0.200000003, 0)
 Close.Font = Enum.Font.SourceSans
-Close.Text = "Close"
+Close.Text = "Close (entirely)"
 Close.TextColor3 = Color3.fromRGB(255, 255, 255)
 Close.TextSize = 14.000
 
@@ -220,6 +222,9 @@ TextBox.TextScaled = true
 TextBox.TextSize = 14.000
 TextBox.TextWrapped = true
 
+
+
+
 local awesomeHoverSound = Instance.new("Sound")
 awesomeHoverSound.Name = "UISFX"
 awesomeHoverSound.SoundId = "rbxassetid://10066936758"
@@ -237,12 +242,11 @@ targetCharacter.Parent = AlrightThisIsAwesome
 
 
 Close.MouseButton1Click:Connect(function()
-	awesomeClickSound:Play()
-	AlrightThisIsAwesome.Enabled = false
+	AlrightThisIsAwesome:Remove()
 	local hint = Instance.new("Hint")
-	hint.Text = 'Press LeftAlt to reopen the spoofer'
+	hint.Text = 'Please reexecute to open the GUI again.'
 	hint.Parent = workspace
-	wait(5)
+	wait(3)
 	hint:Remove()
 end)
 
@@ -300,8 +304,8 @@ Dragging.MouseButton1Click:Connect(function()
 end)
 
 TextBox:GetPropertyChangedSignal("Text"):Connect(function()
-	local newTarget = workspace:FindFirstChild(TextBox.Text)
-	if newTarget then
+	local newTarget = workspace:FindFirstDescendant(TextBox.Text)
+	if newTarget and newTarget:IsA("Model") then
 		targetCharacter.Value = newTarget
 	else
 		local hint = Instance.new("Hint")
